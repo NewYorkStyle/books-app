@@ -1,0 +1,19 @@
+.container {
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.MuiFormControl-root.filter {
+    width: 30%;
+}
+
+.table {
+    border: 2px solid black;
+}

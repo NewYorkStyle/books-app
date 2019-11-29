@@ -4,7 +4,6 @@ import {IMainStore} from '../Models';
 
 const initialState: IMainStore = {
     data: null,
-    isLoading: false,
 };
 
 const mainReducer = (state = initialState, action: IAction) => {
