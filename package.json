@@ -6,21 +6,25 @@
     "scripts": {
         "start": "webpack-dev-server --mode development --open --hot",
         "build": "webpack --mode production",
-        "tslint:fix": "tslint -p . -c tslint.json --fix src/**/*"
+        "tslint:fix": "tslint -p . -c tslint.json --fix src/**/*",
+        "test": "jest"
     },
     "keywords": [],
     "author": "New York Style",
     "license": "ISC",
     "husky": {
         "hooks": {
-            "pre-commit": "npm run tslint:fix && pretty-quick --staged"
+            "pre-commit": "npm run tslint:fix && pretty-quick --staged",
+            "pre-push": "npm run test"
         }
     },
     "devDependencies": {
+        "@types/jest": "24.0.23",
         "@types/react": "16.9.11",
         "@types/react-dom": "16.9.4",
         "@types/react-redux": "7.1.5",
         "@types/react-router-dom": "5.1.2",
+        "@types/react-test-renderer": "16.9.1",
         "babel-core": "6.26.3",
         "babel-loader": "8.0.6",
         "babel-preset-env": "1.7.0",
@@ -28,10 +32,13 @@
         "css-loader": "3.2.0",
         "html-webpack-plugin": "3.2.0",
         "husky": "3.0.9",
+        "jest": "24.9.0",
         "prettier": "1.19.1",
         "pretty-quick": "2.0.1",
+        "react-test-renderer": "16.12.0",
         "source-map-loader": "0.2.4",
         "style-loader": "1.0.0",
+        "ts-jest": "24.2.0",
         "ts-loader": "6.2.1",
         "tslint": "5.20.1",
         "typescript": "3.7.2",

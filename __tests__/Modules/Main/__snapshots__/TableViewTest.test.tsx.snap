@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<table
+  aria-label="simple table"
+  className="MuiTable-root table"
+>
+  <thead
+    className="MuiTableHead-root"
+  >
+    <tr
+      className="MuiTableRow-root MuiTableRow-head"
+    >
+      <th
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-head"
+        scope="col"
+      >
+        Название книги
+      </th>
+      <th
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-head"
+        scope="col"
+      >
+        Автор
+      </th>
+      <th
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-head"
+        scope="col"
+      >
+        Жанр
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    className="MuiTableBody-root"
+  >
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        20000 лье под водой
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Жюль Верн
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Фантастика
+      </td>
+    </tr>
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Убийство в "Восточном экспрессе"
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Агата Кристи
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Детектив
+      </td>
+    </tr>
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Война и мир
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Лев Толстой
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Роман
+      </td>
+    </tr>
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Пикник на обочене
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Братья Стругацкие
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Фантастика
+      </td>
+    </tr>
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Муму
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Иван Тургенев
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Рассказ
+      </td>
+    </tr>
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Повесть временных лет
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Нестор Летописец
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Повесть
+      </td>
+    </tr>
+    <tr
+      className="MuiTableRow-root"
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Сказка о царе Салтане
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Александр Пушкин
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body"
+      >
+        Сказка
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
