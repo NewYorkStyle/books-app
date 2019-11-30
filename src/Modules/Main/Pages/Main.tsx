@@ -14,12 +14,16 @@ import {IBook, IBooksFilter} from '../Models';
 /**
  * Модель props на странице Main.
  *
- * @prop {IBook[]} [data] Данные из БД.
  * @prop {IMainActions} [actions] Экшены.
+ * @prop {IBook[]} [data] Данные из БД.
+ * @prop {string} [errorMsg] Состояние загрузки.
+ * @prop {boolean} [isLoading] Сообщение об ошибке.
  */
 export interface IMainProps {
-    data?: IBook[];
     actions?: IActions;
+    data?: IBook[];
+    errorMsg?: string;
+    isLoading?: boolean;
 }
 
 /**
@@ -131,12 +135,12 @@ class Main extends React.Component<IMainProps, IMainState> {
     };
 
     render(): JSX.Element {
-        const {data} = this.props;
+        const {data, isLoading} = this.props;
 
         return (
             <div className="container">
                 {this.renderFilterSection()}
-                {data && <TableView items={data} />}
+                {isLoading ? <div>Загрузка...</div> : data && <TableView items={data} />}
             </div>
         );
     }
@@ -144,6 +148,8 @@ class Main extends React.Component<IMainProps, IMainState> {
 
 const mapStateToProps = (store: IStore) => ({
     data: store.mainReducer.data,
+    errorMsg: store.mainReducer.errorMsg,
+    isLoading: store.mainReducer.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

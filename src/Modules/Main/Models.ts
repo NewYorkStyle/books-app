@@ -30,7 +30,11 @@ export interface IBooksFilter {
  * Модель state в store.
  *
  * @prop {IBook[]} [data] Список кник.
+ * @prop {string} [errorMsg] Состояние загрузки.
+ * @prop {boolean} [isLoading] Сообщение об ошибке.
  */
 export interface IMainStore {
     data?: IBook[];
+    errorMsg?: string;
+    isLoading?: boolean;
 }

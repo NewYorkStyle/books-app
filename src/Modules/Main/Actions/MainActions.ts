@@ -1,32 +1,34 @@
-import {mockBookData} from '../../../Mocks/BooksData';
-import {IBook, IBooksFilter} from '../Models';
+import {Dispatch} from 'redux';
+import {IBooksFilter} from '../Models';
+import {getData} from '../Services/MainServices';
 import {ActionsTypes} from './ActionTypes';
 
-/**
- * Получение данных.
- *
- * @param {IBooksFilter} [filter] Фильтр.
- */
 export const MainActions = {
+    /**
+     * Получение данных.
+     *
+     * @param {IBooksFilter} [filter] Фильтр.
+     */
     getData: (filter?: IBooksFilter) => {
-        let data = mockBookData;
-
-        if (!!filter) {
-            let key: keyof IBooksFilter;
-            data = mockBookData.filter((item: IBook) => {
-                for (key in filter) {
-                    if (key === 'name') {
-                        return item[key].toLowerCase().indexOf(filter[key].toLowerCase()) !== -1;
-                    }
-                    if (!!filter[key] && item[key] !== filter[key]) return false;
-                }
-                return true;
+        return (dispatch: Dispatch) => {
+            dispatch({
+                type: ActionsTypes.GET_DATA_START,
             });
-        }
-
-        return {
-            type: ActionsTypes.GET_DATA,
-            payload: data,
+            getData(filter).then(
+                (response) => {
+                    dispatch({
+                        type: ActionsTypes.GET_DATA_SUCCESS,
+                        payload: response,
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                    dispatch({
+                        type: ActionsTypes.GET_DATA_FAILURE,
+                        payload: error,
+                    });
+                }
+            );
         };
     },
 };

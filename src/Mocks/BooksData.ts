@@ -1,3 +1,5 @@
+import {IBook, IBooksFilter} from '../Modules/Main/Models';
+
 export const mockBookData = [
     {
         id: '1',
@@ -42,3 +44,22 @@ export const mockBookData = [
         genre: 'Сказка',
     },
 ];
+
+export const getBookData = (filter?: IBooksFilter): IBook[] => {
+    let data = mockBookData;
+
+    if (!!filter) {
+        let key: keyof IBooksFilter;
+        data = mockBookData.filter((item: IBook) => {
+            for (key in filter) {
+                if (key === 'name') {
+                    return item[key].toLowerCase().indexOf(filter[key].toLowerCase()) !== -1;
+                }
+                if (!!filter[key] && item[key] !== filter[key]) return false;
+            }
+            return true;
+        });
+    }
+
+    return data;
+};
