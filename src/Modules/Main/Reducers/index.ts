@@ -3,8 +3,11 @@ import {ActionsTypes} from '../Actions/ActionTypes';
 import {IMainStore} from '../Models';
 
 const initialState: IMainStore = {
-    data: null,
-    errorMsg: null,
+    data: {
+        data: null,
+        errorMsg: null,
+        hasNextPage: false,
+    },
     isLoading: false,
 };
 

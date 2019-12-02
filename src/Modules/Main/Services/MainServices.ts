@@ -1,16 +1,17 @@
 import {getBookData} from '../../../Mocks/BooksData';
-import {IBook, IBooksFilter} from '../Models';
+import {IBooksFilter, IData} from '../Models';
 
 /**
  * Получение данных.
  *
+ * @prop {number} currentlyPage Текущая страница.
  * @param {IBooksFilter} [filter] Фильтр.
  */
-export const getData = (filter?: IBooksFilter): Promise<IBook[]> => {
+export const getData = (currentlyPage: number, filter?: IBooksFilter): Promise<IData> => {
     return new Promise((resolve, reject) => {
         /** Имитация задержки сервера. */
         setTimeout(() => {
-            resolve(getBookData(filter));
+            resolve(getBookData(currentlyPage, filter));
         }, 1000);
     });
 };

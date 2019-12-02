@@ -6,23 +6,22 @@ import {IStore} from '../../../Models';
 import '../styles.css';
 import {MainActions} from '../Actions/MainActions';
 import {IActions} from '../Actions/MainActions';
+import {Pagination} from '../Components/Pagination';
 import {Select} from '../Components/Select';
 import {TableView} from '../Components/TableView';
 import {authorsOptions, genresOptions} from '../Consts';
-import {IBook, IBooksFilter} from '../Models';
+import {IBooksFilter, IData} from '../Models';
 
 /**
  * Модель props на странице Main.
  *
  * @prop {IMainActions} [actions] Экшены.
- * @prop {IBook[]} [data] Данные из БД.
- * @prop {string} [errorMsg] Состояние загрузки.
+ * @prop {IData} [data] Данные из БД.
  * @prop {boolean} [isLoading] Сообщение об ошибке.
  */
 export interface IMainProps {
     actions?: IActions;
-    data?: IBook[];
-    errorMsg?: string;
+    data?: IData;
     isLoading?: boolean;
 }
 
@@ -30,9 +29,11 @@ export interface IMainProps {
  * Модель state на странице Main.
  *
  * @param {IBooksFilter} [filter] Фильтр.
+ * @param {number} currentlyPage Текущая страница.
  */
 export interface IMainState {
     filter?: IBooksFilter;
+    currentlyPage: number;
 }
 
 /**
@@ -48,12 +49,14 @@ class Main extends React.Component<IMainProps, IMainState> {
                 genre: '',
                 name: '',
             },
+            currentlyPage: 1,
         };
     }
 
     componentDidMount = () => {
+        const {currentlyPage, filter} = this.state;
         // Получаем данные на ините страницы.
-        this.props.actions.getData(this.state.filter);
+        this.props.actions.getData(currentlyPage, filter);
     };
 
     /**
@@ -83,11 +86,14 @@ class Main extends React.Component<IMainProps, IMainState> {
         }));
     };
 
+    /**
+     * Обаботчик изменения фильтра.
+     */
     onFilterChange = (field: string, value: string) => {
         const {actions} = this.props;
         const {filter} = this.state;
 
-        actions.getData({
+        actions.getData(1, {
             ...filter,
             [field]: value,
         });
@@ -96,6 +102,7 @@ class Main extends React.Component<IMainProps, IMainState> {
                 ...prevState.filter,
                 [field]: value,
             },
+            currentlyPage: 1,
         }));
     };
 
@@ -107,8 +114,33 @@ class Main extends React.Component<IMainProps, IMainState> {
             const {actions} = this.props;
             const {filter} = this.state;
 
-            actions.getData(filter);
+            actions.getData(1, filter);
+            this.setState({currentlyPage: 1});
         }
+    };
+    /**
+     * Обработчик нажания на следующую страницу
+     */
+    handleonNextPageClick = () => {
+        const {actions} = this.props;
+        const {currentlyPage, filter} = this.state;
+
+        actions.getData(currentlyPage + 1, filter);
+        this.setState((prevState) => ({
+            currentlyPage: prevState.currentlyPage + 1,
+        }));
+    };
+    /**
+     * Обработчик нажания на предыдущую страницу
+     */
+    handleonPrevPageClick = () => {
+        const {actions} = this.props;
+        const {currentlyPage, filter} = this.state;
+
+        actions.getData(currentlyPage - 1, filter);
+        this.setState((prevState) => ({
+            currentlyPage: prevState.currentlyPage - 1,
+        }));
     };
 
     /**
@@ -135,12 +167,30 @@ class Main extends React.Component<IMainProps, IMainState> {
     };
 
     render(): JSX.Element {
-        const {data, isLoading} = this.props;
+        const {
+            data: {data, hasNextPage},
+            isLoading,
+        } = this.props;
+        const {currentlyPage} = this.state;
 
         return (
             <div className="container">
                 {this.renderFilterSection()}
-                {isLoading ? <div>Загрузка...</div> : data && <TableView items={data} />}
+                {isLoading ? (
+                    <div>Загрузка...</div>
+                ) : (
+                    data && (
+                        <div>
+                            <TableView items={data} />{' '}
+                            <Pagination
+                                currentlyPage={currentlyPage}
+                                hasNextPage={hasNextPage}
+                                onNextPageClick={this.handleonNextPageClick}
+                                onPrevPageClick={this.handleonPrevPageClick}
+                            />
+                        </div>
+                    )
+                )}
             </div>
         );
     }
@@ -148,7 +198,6 @@ class Main extends React.Component<IMainProps, IMainState> {
 
 const mapStateToProps = (store: IStore) => ({
     data: store.mainReducer.data,
-    errorMsg: store.mainReducer.errorMsg,
     isLoading: store.mainReducer.isLoading,
 });
 
